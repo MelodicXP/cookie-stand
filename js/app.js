@@ -37,18 +37,31 @@ function cookiesBoughtPerCust(numCust, cookies){
 
 
 // ********** OBJECT LITERALS **********
-// This is where you create your objects for each store
-// Example:
-// let seattle = {
-//   name: 'Seattle',
-//   minCust: 23,
-//   maxCust: 65,
-//   numOfCust: 0,
-//   avgCookiesPerCust: 6.3,
-//   cookiesBought: [],
-//   getCust: function(){
-//     this.numOfCust = randomNumCust(this.minCust, this.maxCust);
-//   },
+let seattle = {
+  name: 'Seattle',
+  minCust: 23,
+  maxCust: 65,
+  numOfCust: 0,
+  avgCookiesPerCust: 6.3,
+  totalCookies: 0,
+  //Creates array to store cookies per hour of operation
+  cookiesBought: [],
+
+  getCookiesBought: function() {
+
+    for(let i = 0; i < hours.length; i++) {
+      this.numOfCust = randomNumCust(this.minCust, this.maxCust);
+      console.log(this.numOfCust);
+      // Placeholder 'cookies' in order to be adding it to the running total of 'totalCookies, and calls helper function cookiesBoughtPerCust()
+      // Got Math.round() from MDN docs, used in order to get rid of decimals
+      let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
+      this.cookiesBought.push(hours[i], cookies);
+      this.totalCookies += cookies;
+    }
+  }
+  //Inser render: function() here, remember to add comma after gotCookiesFunction
+};
+
 //   render: function(){ // This is the function to render to sales page, see example below
 //      ***** DOM MANIPULATION *****
 
@@ -87,6 +100,14 @@ function cookiesBoughtPerCust(numCust, cookies){
 
 
 // ********** EXECUTABLE CODE **********
+seattle.getCookiesBought();
+
+for (let i = 0; i < seattle.cookiesBought.length - 1; i+=2) {
+  console.log(seattle.cookiesBought[i], seattle.cookiesBought[i+1]);
+}
+
+console.log(seattle.totalCookies);
+
 // This is where you call the functions to execute the above code to the HTML page. See below example
 // frankie.getAge();
 // frankie.render();
