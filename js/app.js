@@ -58,8 +58,37 @@ let seattle = {
       this.cookiesBought.push(hours[i], cookies);
       this.totalCookies += cookies;
     }
+
+  },
+
+  // Function to render to sales data page
+  render: function () {
+    // Create <article> element
+    let articleElem = document.createElement('article');
+
+    // Add <article> element to the DOM
+    salesDataSection.appendChild(articleElem);
+
+    // Create <h2> element
+    let h2Elem = document.createElement('h2');
+    // Add text to <h2> element
+    h2Elem.textContent = this.name;
+    // Attach <h2> element to <article> element
+    articleElem.appendChild(h2Elem);
+
+    // Create <ul> element
+    let ulElem = document.createElement('ul');
+    // Attach <ul> element to <h2> element
+    h2Elem.appendChild(ulElem);
+
+    //For loop to create and attach <li> elements from cookiesBought[] array
+    for(let i = 0; i < this.cookiesBought.length; i+=2) {
+      let liElem = document.createElement('li');
+      liElem.textContent = `${this.cookiesBought[i]} ${this.cookiesBought[i+1]}`;
+      ulElem.appendChild(liElem);
+    }
   }
-  //Inser render: function() here, remember to add comma after gotCookiesFunction
+
 };
 
 //   render: function(){ // This is the function to render to sales page, see example below
@@ -107,6 +136,8 @@ for (let i = 0; i < seattle.cookiesBought.length - 1; i+=2) {
 }
 
 console.log(seattle.totalCookies);
+
+seattle.render();
 
 // This is where you call the functions to execute the above code to the HTML page. See below example
 // frankie.getAge();
