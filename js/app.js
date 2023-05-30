@@ -61,17 +61,18 @@ let seattle = {
 
   },
 
+  //      ***** DOM MANIPULATION *****
   // Function to render to sales data page
   render: function () {
+
     // Create <article> element
     let articleElem = document.createElement('article');
-
     // Add <article> element to the DOM
     salesDataSection.appendChild(articleElem);
 
     // Create <h2> element
     let h2Elem = document.createElement('h2');
-    // Add text to <h2> element
+    // Add text to <h2> element to display name of store
     h2Elem.textContent = this.name;
     // Attach <h2> element to <article> element
     articleElem.appendChild(h2Elem);
@@ -81,45 +82,22 @@ let seattle = {
     // Attach <ul> element to <h2> element
     h2Elem.appendChild(ulElem);
 
-    //For loop to create and attach <li> elements from cookiesBought[] array
+    // For loop to create and attach <li> elements from cookiesBought[] array into <ul> element
     for(let i = 0; i < this.cookiesBought.length; i+=2) {
       let liElem = document.createElement('li');
       liElem.textContent = `${this.cookiesBought[i]} ${this.cookiesBought[i+1]}`;
       ulElem.appendChild(liElem);
     }
+
+    // Create <p> element to display total of cookies
+    let pElem = document.createElement('p');
+    // Add text to <p> element containing total of cookies
+    pElem.textContent = `Total: ${this.totalCookies}`;
+    ulElem.appendChild(pElem);
   }
 
 };
-
-//   render: function(){ // This is the function to render to sales page, see example below
-//      ***** DOM MANIPULATION *****
-
-//     STEP 2: Create element
-//     let articleElem = document.createElement('article');
-//
-//     STEP 3: Add it to the dom
-//     kittenSection.appendChild(articleElem);
-
-//     let h2Elem = document.createElement('h2');
-//     h2Elem.textContent = this.name;
-//     articleElem.appendChild(h2Elem);
-
-
-//     //! USEFUL FOR LAB
-//     let ulElem = document.createElement('ul');
-//     articleElem.appendChild(ulElem);
-
-//     for(let i = 0; i < this.interests.length; i++){
-//       let liElem = document.createElement('li');
-//       liElem.textContent = this.interests[i];
-//       ulElem.appendChild(liElem);
-//     }
-
-//     let pElem = document.createElement('p');
-//     pElem.textContent = this.age;
-//     articleElem.appendChild(pElem);
-
-
+//     This example will be useful when time comes to add image
 //     let imgElem = document.createElement('img');
 //     imgElem.src = this.photo;
 //     imgElem.alt = `${this.name} is an adorable ${this.age} month old kitten.`;
@@ -129,14 +107,8 @@ let seattle = {
 
 
 // ********** EXECUTABLE CODE **********
+// Calls function to execute random number of customer * avg # of cookies bought, per hour, and stores total cookies
 seattle.getCookiesBought();
-
-for (let i = 0; i < seattle.cookiesBought.length - 1; i+=2) {
-  console.log(seattle.cookiesBought[i], seattle.cookiesBought[i+1]);
-}
-
-console.log(seattle.totalCookies);
-
 seattle.render();
 
 // This is where you call the functions to execute the above code to the HTML page. See below example
