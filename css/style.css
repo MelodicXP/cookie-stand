@@ -1,6 +1,6 @@
 body {
-  margin-left: 15vw;
-  margin-right: 15vw;
+  margin-left: 10vw;
+  margin-right: 10vw;
   background-color: #ffdead;
   color: #7b3d11;
 }
@@ -8,6 +8,7 @@ body {
 figure {
   /* border: 3px solid white; */
   margin: auto;
+  margin-bottom: 75px;
   /* Used https://www.editorx.com/shaping-design/article/resize-image-css on how to resize image with vw */
   max-width: 40%;
   height: auto;
@@ -104,6 +105,7 @@ p {
   margin: auto;
   width: max-content;
 }
+
 /* '*' applies properties to all of table elements */
 table * { 
   border: 1px double #52280b;
@@ -125,9 +127,9 @@ td {
   text-align: center;
 }
 
-#total-cookies {
+#total-cookies-perStore {
   font-weight: bold;
-  text-align: left;
+  text-align: center;
 }
 
 #row-hours {
@@ -149,7 +151,18 @@ td {
 }
 
 #daily-loc-total{
-  text-align: left;
+  text-align: center;
+}
+
+#hourly-totals {
+  vertical-align: middle;
+  font-weight: bold;
+}
+
+#aggregate-total, #total-all-locations {
+  text-align: center;
+  font-weight: bold;
+  vertical-align: middle;
 }
 
 footer {
