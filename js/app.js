@@ -8,8 +8,11 @@
 // let salesDataSection = document.getElementById('cookie-stands');
 // console.dir(salesDataSection);
 
-let salesTableSection = document.getElementById('cookie-sales-table');
-
+let salesTableSection = document.getElementById('cookie-sales-table'); //access to dom
+let allFranchiseStores = []; // store all franchise store objects
+let salesTable; // variable to attach rows and table elements to
+let allCookieTotals = []; // to store hourly total cookies sold on all locations
+let allDayCookieSales = 0; // to store aggregate total of all cookies of all stores all day
 let hours = [
   '6:00am',
   '7:00am',
@@ -28,10 +31,8 @@ let hours = [
   '8:00pm'
 ];
 
-let allFranchiseStores = []; // store all franchise store objects
-let salesTable; // variable to attach rows and table elements to
-
 // ********** HELPER FUNCTIONS/UTILITES *********
+
 function randomNumCust(min,max){
   //Got this from MDN docs
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -63,6 +64,27 @@ FranchiseStore.prototype.getCookiesBought = function() {
     let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
     this.cookiesBought.push(cookies);
     this.totalCookies += cookies;
+  }
+};
+
+// Calculates total of cookies from all stores per hour, and aggregate total
+FranchiseStore.prototype.getAllCookiesBought = function() {
+
+  //Loop through each hour
+  for (let i = 0; i < hours.length; i++) {
+
+    let allHourlyCookieSales = 0; //holds total of hourly aggregate cookie sales
+
+    // Loop through each store pulling daily sales from cookiesBought array and storing the total in 'allHourlyCookiSales
+    for (let j = 0; j < allFranchiseStores.length; j++) {
+      allHourlyCookieSales += allFranchiseStores[j].cookiesBought[i];
+    }
+
+    // Pushes the aggregate total per hour to the allCookiesTotal array
+    allCookieTotals.push(allHourlyCookieSales);
+
+    // Keeps a running total of each hour aggregate sales in order to be called for complete total of all cookies sold for all locations for the entire day.
+    allDayCookieSales += allHourlyCookieSales;
   }
 };
 
@@ -142,9 +164,39 @@ FranchiseStore.prototype.render = function() {
 
   // Create table data total sales of each location
   let tdElem = document.createElement('td');
-  tdElem.setAttribute('id', 'total-cookies'); //set id for styling
+  tdElem.setAttribute('id', 'total-cookies-perStore'); //set id for styling
   tdElem.textContent = `${this.totalCookies}`;
   row.appendChild(tdElem);
+};
+
+FranchiseStore.prototype.renderAllTotals = function() {
+
+  //Create row that will display total sales per hour of all stores
+  let rowAllTotals = document.createElement('tr');
+  rowAllTotals.setAttribute('id', 'row-all-totals');
+  salesTable.appendChild(rowAllTotals);
+
+  // Create empty cell first cell
+  let thTotalsElem = document.createElement('th');
+  thTotalsElem.setAttribute('id', 'total-all-locations');
+  thTotalsElem.textContent = 'Total All Locations';
+  rowAllTotals.appendChild(thTotalsElem);
+
+  // Create for loop to display total sales across 'rowAllTotals'
+  // ! Reminder: when accessing global variables don't use '.this'
+  // ! Bug was from using 'this.hours.length' which wouldn't display anything
+  for(let i = 0; i < hours.length; i++) {
+    let thTotalsElem = document.createElement('th');
+    thTotalsElem.setAttribute('id', 'hourly-totals'); //set id for styling
+    thTotalsElem.textContent = `${allCookieTotals[i]}`;
+    rowAllTotals.appendChild(thTotalsElem);
+  }
+
+  // Create last cell displaying text aggregate total of all stores for the day
+  let thAggregateTotal = document.createElement('th');
+  thAggregateTotal.setAttribute('id', 'aggregate-total'); //set id for styling
+  thAggregateTotal.textContent = `${allDayCookieSales}` ;
+  rowAllTotals.appendChild(thAggregateTotal);
 };
 
 // ********** EXECUTABLE CODE **********
@@ -161,22 +213,27 @@ allFranchiseStores.push(seattle, tokyo, dubai, paris, lima);
 
 function renderAllStores(){
 
-  // Initial call to renderTable, all elements will attach to the global variable
-  // salesTable stored within the renderTable method
+  // Initial call to renderTable, all elements will attach to the global variable 'salesTable' stored within the renderTable method
   allFranchiseStores[0].renderTable();
 
+  // Displays hours as first row in the table
   allFranchiseStores[0].renderHours();
 
+  // Loops through each store retrieving cookies bought per day and outputting to the table
   for(let i = 0; i < allFranchiseStores.length; i++) {
     allFranchiseStores[i].getCookiesBought();
     allFranchiseStores[i].render();
   }
+
+  // Calls method to retrieve the total of all stores cookies bought per hour and the aggregate total of all cookies of all stores
+  allFranchiseStores[0].getAllCookiesBought();
+
+  // Outputs to last row of the table the aggregate totals per hour and day
+  allFranchiseStores[0].renderAllTotals(); // the last row at the bottom
 }
 
 // Render all franchise store data
 renderAllStores();
-
-
 
 // ********** Class 06 Lab (old code) **********
 // // ********** OBJECT LITERALS **********
