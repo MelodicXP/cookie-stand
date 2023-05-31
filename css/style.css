@@ -104,26 +104,52 @@ p {
   margin: auto;
   width: max-content;
 }
-/* '*' applies border to all of table elements */
+/* '*' applies properties to all of table elements */
 table * { 
   border: 1px double #52280b;
-  padding: 10px;
+  padding: 5px;
   background-color: #eea9b8;
+  width: auto; /* Cell adjust to size of content */
+  min-width: 75px; /* Set a minimum width for the cell */
+  max-width: 125px; /*Set a maximum width for the cell */
 }
 
-th {
-  font-size: 1.25vw;
-  font-family: 'Geologica', sans-serif; 
+th, #row-hours {
+  font-size: 1vw;
+  font-family: 'Geologica', sans-serif;
 }
 
 td {
   font-size: 1vw;
   font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 #total-cookies {
-  font-size: 1.25vw;
   font-weight: bold;
+  text-align: left;
+}
+
+#row-hours {
+  border-bottom: none;
+  font-weight: bold;
+}
+
+#row-hours2 {
+  border-top: none;
+}
+
+#row-hours th {
+  border: none; /*Removes border around hours*/
+  vertical-align: middle; /* aligns vertically to middle of cell, the hours */
+}
+
+#row-hours2 td {
+  border: none;
+}
+
+#daily-loc-total{
+  text-align: left;
 }
 
 footer {

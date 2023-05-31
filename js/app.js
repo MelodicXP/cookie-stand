@@ -3,30 +3,33 @@
 
 // ********** GLOBALS **************
 //Creates window into HTML document to manipulate
-let salesDataSection = document.getElementById('cookie-stands');
-console.dir(salesDataSection);
+
+// Old code, was used to display as a list
+// let salesDataSection = document.getElementById('cookie-stands');
+// console.dir(salesDataSection);
 
 let salesTableSection = document.getElementById('cookie-sales-table');
 
 let hours = [
-  '6am',
-  '7am',
-  '8am',
-  '9am',
-  '10am',
-  '11am',
-  '12pm',
-  '1pm',
-  '2pm',
-  '3pm',
-  '4pm',
-  '5pm',
-  '6pm',
-  '7pm',
-  '8pm'
+  '6:00am',
+  '7:00am',
+  '8:00am',
+  '9:00am',
+  '10:00am',
+  '11:00am',
+  '12:00pm',
+  '1:00pm',
+  '2:00pm',
+  '3:00pm',
+  '4:00pm',
+  '5:00pm',
+  '6:00pm',
+  '7:00pm',
+  '8:00pm'
 ];
 
 let allFranchiseStores = []; // store all franchise store objects
+let salesTable; // variable to attach rows and table elements to
 
 // ********** HELPER FUNCTIONS/UTILITES *********
 function randomNumCust(min,max){
@@ -63,81 +66,117 @@ FranchiseStore.prototype.getCookiesBought = function() {
   }
 };
 
-FranchiseStore.prototype.render = function() {
+// Creates a general table element to be called when necessary
+FranchiseStore.prototype.renderTable = function() {
 
-  // Create <article> element
-  let articleElem = document.createElement('article');
-  // Add <article> element to the DOM
-  salesDataSection.appendChild(articleElem);
+  this.tableSalesElem = document.createElement('table');
+  salesTableSection.appendChild(this.tableSalesElem);
 
-  // Create <h2> element
-  let h2Elem = document.createElement('h2');
-  // Add text to <h2> element to display name of store
-  h2Elem.textContent = this.name;
-  // Attach <h2> element to <article> element
-  articleElem.appendChild(h2Elem);
+  // Applies tableSalesElem table element to globalscope variable 'salesTable'
+  // so that all table elements from render() can attach to this one table
+  salesTable = this.tableSalesElem;
+};
 
-  // Create <ul> element
-  let ulElem = document.createElement('ul');
-  // Attach <ul> element to <h2> element
-  articleElem.appendChild(ulElem);
+FranchiseStore.prototype.renderHours = function() {
 
-  // For loop to create and attach <li> elements from cookiesBought[] array into <ul> element
-  for(let i = 0; i < this.cookiesBought.length; i++) {
-    let liElem = document.createElement('li');
-    liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`;
-    ulElem.appendChild(liElem);
+  //Create row that will display hours
+  let rowHours = document.createElement('tr');
+  rowHours.setAttribute('id', 'row-hours');
+  salesTable.appendChild(rowHours);
+
+  // Create empty cell first cell
+  let thHoursElem = document.createElement('th');
+  thHoursElem.textContent = '';
+  rowHours.appendChild(thHoursElem);
+
+  // Create for loop to display hours across rowHours
+  // ! Reminder: when accessing global variables don't use '.this'
+  // ! Bug was from using 'this.hours.length' which wouldn't display anything
+  for(let i = 0; i < hours.length; i++) {
+    let thHoursElem = document.createElement('th');
+    thHoursElem.textContent = `${hours[i]}`;
+    rowHours.appendChild(thHoursElem);
   }
 
-  // Create <p> element to display total of cookies
-  let pElem = document.createElement('p');
-  // Add text to <p> element containing total of cookies
-  pElem.textContent = `Total Cookies: ${this.totalCookies}`;
-  ulElem.appendChild(pElem);
+  // Create last cell displaying text 'Daily Location Total'
+  let thDailyLocTotal = document.createElement('th');
+  thDailyLocTotal.setAttribute('id', 'daily-loc-total'); //set id for styling
+  thDailyLocTotal.textContent = 'Daily Location Total';
+  rowHours.appendChild(thDailyLocTotal);
 
+  // ********** Creates empty row below hours displayed **********
+  // Might need later
+  // // Create empty row below hours displayed
+  // let rowHours2 = document.createElement('tr');
+  // rowHours2.setAttribute('id', 'row-hours2');
+  // salesTable.appendChild(rowHours2);
 
-  // Create table
-  let tableElem = document.createElement('table');
-  salesTableSection.appendChild(tableElem);
+  // // Create for loop displaying empty cells below hours
+  // // ! Reminder: when accessing global variables don't use '.this'
+  // // ! Bug was from using 'this.hours.length' which wouldn't display anything
+  // for(let i = 0; i < hours.length + 2; i++) {
+  //   let tdHoursElem = document.createElement('td');
+  //   tdHoursElem.setAttribute('id', 'td-row-hours2');
+  //   tdHoursElem.textContent = '';
+  //   rowHours2.appendChild(tdHoursElem);
+  // }
+};
 
-  // Create row
-  let row1 = document.createElement('tr');
-  tableElem.appendChild(row1);
+FranchiseStore.prototype.render = function() {
+
+  //Creates row to display each franchise name and daily sales data
+  let row = document.createElement('tr');
+  salesTable.appendChild(row);
 
   // Create table header for name of store
   let th1Elem = document.createElement('th');
   th1Elem.textContent = this.name;
-  row1.appendChild(th1Elem);
+  row.appendChild(th1Elem);
 
   // Create table data to display daily sales of cookies
   for(let i = 0; i < this.cookiesBought.length; i++) {
     let tdElem = document.createElement('td');
     tdElem.textContent = `${this.cookiesBought[i]}`;
-    row1.appendChild(tdElem);
+    row.appendChild(tdElem);
   }
 
   // Create table data total sales of each location
   let tdElem = document.createElement('td');
   tdElem.setAttribute('id', 'total-cookies'); //set id for styling
   tdElem.textContent = `${this.totalCookies}`;
-  row1.appendChild(tdElem);
+  row.appendChild(tdElem);
 };
 
 // ********** EXECUTABLE CODE **********
 
+// Create object for each store
 let seattle = new FranchiseStore('Seattle', 23, 65, 6.3);
+let tokyo = new FranchiseStore('Tokyo', 3, 24, 1.2);
+let dubai = new FranchiseStore('Dubai', 11, 38, 3.7);
+let paris = new FranchiseStore('Paris', 20, 38, 2.3);
+let lima = new FranchiseStore('Lima', 2, 16, 14.6);
 
-// Push franchise store to the allFranchiseStores array
-allFranchiseStores.push(seattle);
+// Push franchise store objects to the allFranchiseStores array
+allFranchiseStores.push(seattle, tokyo, dubai, paris, lima);
 
 function renderAllStores(){
+
+  // Initial call to renderTable, all elements will attach to the global variable
+  // salesTable stored within the renderTable method
+  allFranchiseStores[0].renderTable();
+
+  allFranchiseStores[0].renderHours();
+
   for(let i = 0; i < allFranchiseStores.length; i++) {
     allFranchiseStores[i].getCookiesBought();
     allFranchiseStores[i].render();
   }
 }
 
+// Render all franchise store data
 renderAllStores();
+
+
 
 // ********** Class 06 Lab (old code) **********
 // // ********** OBJECT LITERALS **********
