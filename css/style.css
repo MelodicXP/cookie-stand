@@ -1,19 +1,74 @@
 body {
-  margin-left: 30px
+  margin-left: 15vw;
+  margin-right: 15vw;
+  background-color: #ffdead;
+  color: #7b3d11;
 }
+
+figure {
+  /* border: 3px solid white; */
+  margin: auto;
+  /* Used https://www.editorx.com/shaping-design/article/resize-image-css on how to resize image with vw */
+  max-width: 40%;
+  height: auto;
+  /* width: 100%; */
+}
+
+img {
+  /* border: 3px solid red; */
+  height: auto;
+  width: 100%;
+}
+
+nav {
+  /*border: 3px solid paleturquoise;*/
+  margin-bottom: 0px;
+  padding: 0px;
+  
+}
+
+#nav-list{
+  /*border: 3px solid yellow;*/
+  margin-bottom: 30px;
+  margin-top: 0px;
+  padding: 0px;
+}
+
+#nav-list li {
+  border: 3px solid #eea9b8;
+  display: inline-block;
+  background-color: #52280b;
+  margin-right: 35px;
+  margin-bottom: 0;
+}
+
+a {
+  border: 1px solid #eea9b8;
+  color: rgb(255,255,255);
+  font-size: 1.25vw;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
+
 h1 {
   /* border: 3px solid pink; */
   font-size: 2.5vw;
-  font-weight: bold;
+  font-family: 'Geologica', sans-serif;
   width: max-content;
+  margin: auto;
   margin-bottom: 20px;
 }
 
 h2 {
   /* border: 3px solid green; */
   font-size: 2vw;
+  font-family: 'Geologica', sans-serif;
   width: max-content;
-  font-weight: bold;
   margin-bottom: 5px;
 }
 
@@ -26,14 +81,15 @@ ul {
 li {
   /* border: 3px solid purple; */
   font-size: 1.25vw;
+  font-family: Arial, Helvetica, sans-serif;
   width: max-content;
   margin-bottom: 5px; 
 }
 
 p {
   /* border: 3px solid greenyellow; */
-  font-weight: bold;
   font-size: 1.5vw;
+  font-family: Arial, Helvetica, sans-serif;
   width: max-content;
   margin-bottom: 20px;
 }
