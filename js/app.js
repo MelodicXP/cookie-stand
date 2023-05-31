@@ -121,8 +121,6 @@ FranchiseStore.prototype.render = function() {
   tdElem.setAttribute('id', 'total-cookies'); //set id for styling
   tdElem.textContent = `${this.totalCookies}`;
   row1.appendChild(tdElem);
-
-
 };
 
 // ********** EXECUTABLE CODE **********
