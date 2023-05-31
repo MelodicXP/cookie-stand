@@ -48,6 +48,7 @@ let seattle = {
   //Creates array to store cookies per hour of operation
   cookiesBought: [],
 
+  // Pushed amount of cookies into cookiesBought[] array, and keeps running total of cookies.
   getCookiesBought: function() {
 
     for(let i = 0; i < hours.length; i++) {
@@ -55,15 +56,16 @@ let seattle = {
       // Placeholder 'cookies' in order to be adding it to the running total of 'totalCookies, and calls helper function cookiesBoughtPerCust()
       // Got Math.round() from MDN docs, used in order to get rid of decimals
       let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
-      this.cookiesBought.push(hours[i], cookies);
+      this.cookiesBought.push(cookies);
       this.totalCookies += cookies;
     }
-
   },
 
   //      ***** DOM MANIPULATION *****
-  // Function to render to sales data page
+  // Function to render/display to sales.html
   render: function () {
+
+    seattle.getCookiesBought();
 
     // Create <article> element
     let articleElem = document.createElement('article');
@@ -83,22 +85,22 @@ let seattle = {
     articleElem.appendChild(ulElem);
 
     // For loop to create and attach <li> elements from cookiesBought[] array into <ul> element
-    for(let i = 0; i < this.cookiesBought.length; i+=2) {
+    for(let i = 0; i < this.cookiesBought.length; i++) {
       let liElem = document.createElement('li');
-      liElem.textContent = `${this.cookiesBought[i]}: ${this.cookiesBought[i+1]}`;
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`;
       ulElem.appendChild(liElem);
     }
 
     // Create <p> element to display total of cookies
     let pElem = document.createElement('p');
     // Add text to <p> element containing total of cookies
-    pElem.textContent = `Total: ${this.totalCookies}`;
+    pElem.textContent = `Total Cookies: ${this.totalCookies}`;
     ulElem.appendChild(pElem);
   }
 
 };
 
-// Tokyo location
+// Tokyo Location
 let tokyo = {
   name: 'Tokyo',
   minCust: 3,
@@ -109,6 +111,7 @@ let tokyo = {
   //Creates array to store cookies per hour of operation
   cookiesBought: [],
 
+  // Pushed amount of cookies into cookiesBought[] array, and keeps running total of cookies.
   getCookiesBought: function() {
 
     for(let i = 0; i < hours.length; i++) {
@@ -116,15 +119,16 @@ let tokyo = {
       // Placeholder 'cookies' in order to be adding it to the running total of 'totalCookies, and calls helper function cookiesBoughtPerCust()
       // Got Math.round() from MDN docs, used in order to get rid of decimals
       let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
-      this.cookiesBought.push(hours[i], cookies);
+      this.cookiesBought.push(cookies);
       this.totalCookies += cookies;
     }
-
   },
 
   //      ***** DOM MANIPULATION *****
   // Function to render to sales data page
   render: function () {
+
+    tokyo.getCookiesBought();
 
     // Create <article> element
     let articleElem = document.createElement('article');
@@ -144,22 +148,22 @@ let tokyo = {
     articleElem.appendChild(ulElem);
 
     // For loop to create and attach <li> elements from cookiesBought[] array into <ul> element
-    for(let i = 0; i < this.cookiesBought.length; i+=2) {
+    for(let i = 0; i < this.cookiesBought.length; i++) {
       let liElem = document.createElement('li');
-      liElem.textContent = `${this.cookiesBought[i]}: ${this.cookiesBought[i+1]}`;
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`;
       ulElem.appendChild(liElem);
     }
 
     // Create <p> element to display total of cookies
     let pElem = document.createElement('p');
     // Add text to <p> element containing total of cookies
-    pElem.textContent = `Total: ${this.totalCookies}`;
+    pElem.textContent = `Total Cookies: ${this.totalCookies}`;
     ulElem.appendChild(pElem);
   }
 
 };
 
-// Dubai location
+// Dubai Location
 let dubai = {
   name: 'Dubai',
   minCust: 11,
@@ -170,6 +174,7 @@ let dubai = {
   //Creates array to store cookies per hour of operation
   cookiesBought: [],
 
+  // Pushed amount of cookies into cookiesBought[] array, and keeps running total of cookies.
   getCookiesBought: function() {
 
     for(let i = 0; i < hours.length; i++) {
@@ -177,15 +182,16 @@ let dubai = {
       // Placeholder 'cookies' in order to be adding it to the running total of 'totalCookies, and calls helper function cookiesBoughtPerCust()
       // Got Math.round() from MDN docs, used in order to get rid of decimals
       let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
-      this.cookiesBought.push(hours[i], cookies);
+      this.cookiesBought.push(cookies);
       this.totalCookies += cookies;
     }
-
   },
 
   //      ***** DOM MANIPULATION *****
   // Function to render to sales data page
   render: function () {
+
+    dubai.getCookiesBought();
 
     // Create <article> element
     let articleElem = document.createElement('article');
@@ -205,22 +211,22 @@ let dubai = {
     articleElem.appendChild(ulElem);
 
     // For loop to create and attach <li> elements from cookiesBought[] array into <ul> element
-    for(let i = 0; i < this.cookiesBought.length; i+=2) {
+    for(let i = 0; i < this.cookiesBought.length; i++) {
       let liElem = document.createElement('li');
-      liElem.textContent = `${this.cookiesBought[i]}: ${this.cookiesBought[i+1]}`;
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`;
       ulElem.appendChild(liElem);
     }
 
     // Create <p> element to display total of cookies
     let pElem = document.createElement('p');
     // Add text to <p> element containing total of cookies
-    pElem.textContent = `Total: ${this.totalCookies}`;
+    pElem.textContent = `Total Cookies: ${this.totalCookies}`;
     ulElem.appendChild(pElem);
   }
 
 };
 
-// Paris location
+// Paris Location
 let paris = {
   name: 'Paris',
   minCust: 20,
@@ -231,6 +237,7 @@ let paris = {
   //Creates array to store cookies per hour of operation
   cookiesBought: [],
 
+  // Pushed amount of cookies into cookiesBought[] array, and keeps running total of cookies.
   getCookiesBought: function() {
 
     for(let i = 0; i < hours.length; i++) {
@@ -238,15 +245,16 @@ let paris = {
       // Placeholder 'cookies' in order to be adding it to the running total of 'totalCookies, and calls helper function cookiesBoughtPerCust()
       // Got Math.round() from MDN docs, used in order to get rid of decimals
       let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
-      this.cookiesBought.push(hours[i], cookies);
+      this.cookiesBought.push(cookies);
       this.totalCookies += cookies;
     }
-
   },
 
   //      ***** DOM MANIPULATION *****
   // Function to render to sales data page
   render: function () {
+
+    paris.getCookiesBought();
 
     // Create <article> element
     let articleElem = document.createElement('article');
@@ -266,22 +274,22 @@ let paris = {
     articleElem.appendChild(ulElem);
 
     // For loop to create and attach <li> elements from cookiesBought[] array into <ul> element
-    for(let i = 0; i < this.cookiesBought.length; i+=2) {
+    for(let i = 0; i < this.cookiesBought.length; i++) {
       let liElem = document.createElement('li');
-      liElem.textContent = `${this.cookiesBought[i]}: ${this.cookiesBought[i+1]}`;
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`;
       ulElem.appendChild(liElem);
     }
 
     // Create <p> element to display total of cookies
     let pElem = document.createElement('p');
     // Add text to <p> element containing total of cookies
-    pElem.textContent = `Total: ${this.totalCookies}`;
+    pElem.textContent = `Total Cookies: ${this.totalCookies}`;
     ulElem.appendChild(pElem);
   }
 
 };
 
-// Lima location
+// Lima Location
 let lima = {
   name: 'Lima',
   minCust: 2,
@@ -292,6 +300,7 @@ let lima = {
   //Creates array to store cookies per hour of operation
   cookiesBought: [],
 
+  // Pushed amount of cookies into cookiesBought[] array, and keeps running total of cookies.
   getCookiesBought: function() {
 
     for(let i = 0; i < hours.length; i++) {
@@ -299,15 +308,16 @@ let lima = {
       // Placeholder 'cookies' in order to be adding it to the running total of 'totalCookies, and calls helper function cookiesBoughtPerCust()
       // Got Math.round() from MDN docs, used in order to get rid of decimals
       let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
-      this.cookiesBought.push(hours[i], cookies);
+      this.cookiesBought.push(cookies);
       this.totalCookies += cookies;
     }
-
   },
 
   //      ***** DOM MANIPULATION *****
   // Function to render to sales data page
   render: function () {
+
+    lima.getCookiesBought();
 
     // Create <article> element
     let articleElem = document.createElement('article');
@@ -327,20 +337,22 @@ let lima = {
     articleElem.appendChild(ulElem);
 
     // For loop to create and attach <li> elements from cookiesBought[] array into <ul> element
-    for(let i = 0; i < this.cookiesBought.length; i+=2) {
+    for(let i = 0; i < this.cookiesBought.length; i++) {
       let liElem = document.createElement('li');
-      liElem.textContent = `${this.cookiesBought[i]}: ${this.cookiesBought[i+1]}`;
+      liElem.textContent = `${hours[i]}: ${this.cookiesBought[i]}`;
       ulElem.appendChild(liElem);
     }
 
     // Create <p> element to display total of cookies
     let pElem = document.createElement('p');
     // Add text to <p> element containing total of cookies
-    pElem.textContent = `Total: ${this.totalCookies}`;
+    pElem.textContent = `Total Cookies: ${this.totalCookies}`;
     ulElem.appendChild(pElem);
   }
 
 };
+
+
 //     This example will be useful when time comes to add image
 //     let imgElem = document.createElement('img');
 //     imgElem.src = this.photo;
@@ -351,18 +363,10 @@ let lima = {
 
 
 // ********** EXECUTABLE CODE **********
-// Calls function to execute random number of customer * avg # of cookies bought, per hour, and stores total cookies
-seattle.getCookiesBought();
+// Calls render function to display output of sales data
 seattle.render();
-
-tokyo.getCookiesBought();
 tokyo.render();
-
-dubai.getCookiesBought();
 dubai.render();
-
-paris.getCookiesBought();
 paris.render();
-
-lima.getCookiesBought();
 lima.render();
+
