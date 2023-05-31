@@ -6,6 +6,8 @@
 let salesDataSection = document.getElementById('cookie-stands');
 console.dir(salesDataSection);
 
+let salesTableSection = document.getElementById('cookie-sales-table');
+
 let hours = [
   '6am',
   '7am',
@@ -62,7 +64,6 @@ FranchiseStore.prototype.getCookiesBought = function() {
 };
 
 FranchiseStore.prototype.render = function() {
-  // seattle.getCookiesBought();
 
   // Create <article> element
   let articleElem = document.createElement('article');
@@ -93,6 +94,34 @@ FranchiseStore.prototype.render = function() {
   // Add text to <p> element containing total of cookies
   pElem.textContent = `Total Cookies: ${this.totalCookies}`;
   ulElem.appendChild(pElem);
+
+
+  // Create table
+  let tableElem = document.createElement('table');
+  salesTableSection.appendChild(tableElem);
+
+  // Create row
+  let row1 = document.createElement('tr');
+  tableElem.appendChild(row1);
+
+  // Create table header for name of store
+  let th1Elem = document.createElement('th');
+  th1Elem.textContent = this.name;
+  row1.appendChild(th1Elem);
+
+  // Create table data to display daily sales of cookies
+  for(let i = 0; i < this.cookiesBought.length; i++) {
+    let tdElem = document.createElement('td');
+    tdElem.textContent = `${this.cookiesBought[i]}`;
+    row1.appendChild(tdElem);
+  }
+
+  // Create table data total sales of each location
+  let tdElem = document.createElement('td');
+  tdElem.textContent = `${this.totalCookies}`;
+  row1.appendChild(tdElem);
+
+
 };
 
 // ********** EXECUTABLE CODE **********
