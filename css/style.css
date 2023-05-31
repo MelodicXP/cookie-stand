@@ -1,0 +1,45 @@
+body {
+  margin-left: 30px
+}
+h1 {
+  /* border: 3px solid pink; */
+  font-size: 2.5vw;
+  font-weight: bold;
+  width: max-content;
+  margin-bottom: 20px;
+}
+
+h2 {
+  /* border: 3px solid green; */
+  font-size: 2vw;
+  width: max-content;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+ul {
+  /* border: 3px solid orange; */
+  width: max-content;
+  margin-left: 10px;
+}
+
+li {
+  /* border: 3px solid purple; */
+  font-size: 1.25vw;
+  width: max-content;
+  margin-bottom: 5px; 
+}
+
+p {
+  /* border: 3px solid greenyellow; */
+  font-weight: bold;
+  font-size: 1.5vw;
+  width: max-content;
+  margin-bottom: 20px;
+}
+
+#home-link {
+  /* border: 3px solid blue; */
+  margin-bottom: 10px;
+}
+

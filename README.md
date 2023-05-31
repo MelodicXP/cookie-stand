@@ -1,21 +1,20 @@
 # 201-Class 6
 
-## Cookie Stand
+## Salmon Cookie Stands
 
-I build an app with a direct and powerful purpose. It does all of the things that it accomplishes well. I should describe the purpose and functionality so those that visit my README understand the app
+App that displays sales data of salmon cookies sold for various locations
 
 ### Author: Melodic
 
 ### Links and Resources
 
-* [submission PR](http://xyz.com)
-* Any Links you used as reference
+* [In Class Demo](https://github.com/codefellows/seattle-code-201d97/blob/main/class-06/inclass-demo/js/app.js)
 
 ### Lighthouse Accessibility Report Score
 
-* Provide a screenshot of your score after running a Lighthouse Accessibility report.
+* Intial work done in JavaScript, Lighthouse report will be provided in future iteration.
 
 ### Reflections and Comments
 
-* Consider including the answers to your daily journal and submission questions here
-* This is also a good place to reflect on the tools and resources used and learned
+* Nuances I learned so far is that when pushing to an array, you can call a function/method within the push call, and even call a function within a function.
+* Using placeholders for temporary values really assist in solving for a desired output.
