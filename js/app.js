@@ -118,6 +118,7 @@ FranchiseStore.prototype.render = function() {
 
   // Create table data total sales of each location
   let tdElem = document.createElement('td');
+  tdElem.setAttribute('id', 'total-cookies'); //set id for styling
   tdElem.textContent = `${this.totalCookies}`;
   row1.appendChild(tdElem);
 
