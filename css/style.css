@@ -99,3 +99,37 @@ p {
   margin-bottom: 10px;
 }
 
+#cookie-sales-table {
+  border: 3px solid #52280b;
+  margin: auto;
+  width: max-content;
+}
+/* '*' applies border to all of table elements */
+table * { 
+  border: 1px double #52280b;
+  padding: 10px;
+  background-color: #eea9b8;
+}
+
+th {
+  font-size: 1.25vw;
+  font-family: 'Geologica', sans-serif; 
+}
+
+td {
+  font-size: 1vw;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#total-cookies {
+  font-size: 1.25vw;
+  font-weight: bold;
+}
+
+footer {
+  /* border: 3px solid #52280b; */
+  flex-shrink: 0;
+  width: max-content;
+  font-size: 1vw;
+  margin-top: 20px
+}
