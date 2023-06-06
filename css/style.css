@@ -101,9 +101,18 @@ p {
 }
 
 #cookie-sales-table {
-  border: 3px solid #52280b;
+  /* border: 3px solid red; */
   margin: auto;
-  width: max-content;
+  max-width: 100vw;
+  width: 100%;
+}
+
+table {
+  width: auto;
+  margin: auto;
+  min-width: 5vw;
+  max-width: 15vw;
+  border: 3px solid #52280b;
 }
 
 /* '*' applies properties to all of table elements */
@@ -111,9 +120,6 @@ table * {
   border: 1px double #52280b;
   padding: 5px;
   background-color: #eea9b8;
-  width: auto; /* Cell adjust to size of content */
-  min-width: 75px; /* Set a minimum width for the cell */
-  max-width: 125px; /*Set a maximum width for the cell */
 }
 
 th, #row-hours {
