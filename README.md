@@ -1,4 +1,4 @@
-# 201-Class 6, 7
+# 201-Class 6, 7, 8
 
 ## Salmon Cookie Stands
 
@@ -24,6 +24,12 @@ App that displays sales data of salmon cookies sold for various franchise locati
 * June 5, 2023 - [LightHouse Accessibility Score](img/LightHouseScreenshot06052023.jpg)
 
 ### **Reflections and Comments**
+
+### Class 08 - CSS Flex Display
+
+    * I learned how to use display flex to make laying out elements faster and easier
+    * I learned how to create a wireframe which makes it easier to translate to code once a layout is set before hand.
+    * I applied hover and transitions (learned from lecture) to give site a little more 'personality'.
 
 ### Class 07 - Constructors
 
