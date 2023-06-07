@@ -13,6 +13,7 @@ App that displays sales data of salmon cookies sold for various franchise locati
 
 ### Lighthouse Accessibility Report Score
 
+* June 10, 2023 - [LightHouse Accessibility Score](img/LightHouse06102023.jpg)
 * June 5, 2023 - [LightHouse Accessibility Score](img/LightHouseScreenshot06052023.jpg)
 
 ### **Reflections and Comments**
