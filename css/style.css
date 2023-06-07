@@ -1,51 +1,92 @@
 body {
-  margin-left: 10vw;
-  margin-right: 10vw;
   background-color: #ffdead;
   color: #7b3d11;
 }
 
-figure {
-  /* border: 3px solid white; */
-  margin: auto;
-  margin-bottom: 75px;
-  /* Used https://www.editorx.com/shaping-design/article/resize-image-css on how to resize image with vw */
-  max-width: 40%;
+main {
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+header{
+  display: flex;
+  justify-content: center;
+  background-color: #f5fffa;
+  /* margin: auto; */
+  width: 100%;
   height: auto;
-  /* width: 100%; */
+  margin-bottom: 30px;
+  border-bottom: 5px solid #7b3d11;
+  
+}
+
+nav {
+  /* border: 3px solid paleturquoise; */
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+#hero-fig-elem {
+  /* border: 3px solid red; */
+  display: flex;
+  max-width: 25%;
+  height: auto;
+  margin-left: 40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 img {
-  /* border: 3px solid red; */
+  /* border: 3px solid green; */
+  align-items: center;
   height: auto;
   width: 100%;
 }
 
-nav {
-  /*border: 3px solid paleturquoise;*/
-  margin-bottom: 0px;
-  padding: 0px;
-  
+h1 {
+  /* border: 3px solid pink; */
+  font-size: 2.5vw;
+  font-family: 'Geologica', sans-serif;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  margin-left: 35px;
+  margin-right: 0px;
 }
 
 #nav-list{
-  /*border: 3px solid yellow;*/
-  margin-bottom: 30px;
-  margin-top: 0px;
-  padding: 0px;
+  /* border: 3px solid yellow; */
+  width: 100%;
+  display: flex;
+  justify-content:space-between;
+  align-items: end;
+  margin-right: 40px;
+  margin-left: 0px;
 }
 
 #nav-list li {
-  border: 3px solid #eea9b8;
-  display: inline-block;
+  /* border: 3px solid red; */
   background-color: #52280b;
-  margin-right: 35px;
-  margin-bottom: 0;
+  height: 1.9vw;
+  display: flex;
+  align-items: center;
 }
 
-a {
-  border: 1px solid #eea9b8;
-  color: rgb(255,255,255);
+#nav-list a:hover {
+  background-color: #ffdead;
+  color:#52280b;
+  border: 4px solid #eea9b8;
+  font-weight: bold;
+  font-size: 1.4vw;
+}
+
+#nav-list a {
+  border: 4px solid #eea9b8;
+  background-color: #52280b;
+  color: #f5fffa;
   font-size: 1.25vw;
   padding-left: 10px;
   padding-right: 10px;
@@ -54,15 +95,7 @@ a {
   display: flex;
   justify-content: center;
   text-decoration: none;
-}
-
-h1 {
-  /* border: 3px solid pink; */
-  font-size: 2.5vw;
-  font-family: 'Geologica', sans-serif;
-  width: max-content;
-  margin: auto;
-  margin-bottom: 20px;
+  transition: 350ms;
 }
 
 h2 {
@@ -95,80 +128,234 @@ p {
   margin-bottom: 20px;
 }
 
-#home-link {
-  /* border: 3px solid blue; */
-  margin-bottom: 10px;
-}
-
-#cookie-sales-table {
+#hours-open{
   /* border: 3px solid red; */
-  margin: auto;
-  max-width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  margin-right: 40px;
+  margin-bottom: 30px;
+}
+
+#pic-of-family {
+  height: auto;
+  width: 50%;
+}
+
+#open-daily-h2 {
+  /* border: 2px solid green; */
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-size: 6vw;
+  font-weight: bold;
+}
+
+#locations {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 40px;
+  margin-bottom: 45px;
+}
+
+#locations-text {
+  width: 50%;
+  /* border: 3px solid green; */
+  display: flex;
+  flex-direction: column;
+}
+
+#locations-h2 {
+  /* border: 3px solid red; */
+  font-size: 4vw;
+  font-weight: bold;
   width: 100%;
-}
-
-table {
-  width: auto;
-  margin: auto;
-  min-width: 5vw;
-  max-width: 15vw;
-  border: 3px solid #52280b;
-}
-
-/* '*' applies properties to all of table elements */
-table * { 
-  border: 1px double #52280b;
-  padding: 5px;
-  background-color: #eea9b8;
-}
-
-th, #row-hours {
-  font-size: 1vw;
-  font-family: 'Geologica', sans-serif;
-}
-
-td {
-  font-size: 1vw;
-  font-family: Arial, Helvetica, sans-serif;
   text-align: center;
+  margin-bottom: 50px;
 }
 
-#total-cookies-perStore {
+#list-locations {
+ /* border: 3px solid purple; */
+ margin-right: 40px;
+ width: 100%;
+}
+
+#list-locations li {
+  /* border:3px solid pink; */
+  width: 92%;
+  font-size: 2.25vw;
   font-weight: bold;
+  list-style: disc;
+  line-height: 110%;
+  margin-left: 50px;
+  margin-bottom: 50px;
+}
+
+#pic-of-fish {
+  height: auto;
+  width: 50%;
+}
+
+#baked-daily {
+  margin-right: 40px;
+  border-top: 4px solid #52280b;
+  margin-bottom: 45px;
+}
+
+#baked-fresh-daily-text {
+  font-size: 4vw;
+  font-weight: bold;
+  width: 100%;
   text-align: center;
+  margin-bottom: 30px;
+  padding-top: 30px;
 }
 
-#row-hours {
-  border-bottom: none;
+#baked-cookie-pics {
+  display:flex;
+  justify-content: space-evenly;
+  align-items: top;
+  padding-top: 30px;
+}
+
+#baked-cookie-pics img {
+  height: auto;
+  width: 25%;
+}
+
+#merch {
+  margin-right: 40px;
+  margin-bottom:30px;
+  border-top: 4px solid #52280b;
+  border-bottom: 4px solid #52280b;
+  padding-bottom: 45px;
+}
+
+#check-out-merch-text {
+  font-size: 4vw;
   font-weight: bold;
-}
-
-#row-hours2 {
-  border-top: none;
-}
-
-#row-hours th {
-  border: none; /*Removes border around hours*/
-  vertical-align: middle; /* aligns vertically to middle of cell, the hours */
-}
-
-#row-hours2 td {
-  border: none;
-}
-
-#daily-loc-total{
+  width: 100%;
   text-align: center;
+  margin-bottom: 30px;
+  padding-top: 30px;
 }
 
-#hourly-totals {
-  vertical-align: middle;
+#t-shirt-merch {
+  display:flex;
+  justify-content: space-evenly;
+  align-items: top;
+  padding-top: 30px;
+}
+
+#t-shirt-merch a {
+  height: auto;
+  width: 25%;
+  transition: 350ms;
+}
+
+#t-shirt-merch a:hover {
+  width: 35%;
+}
+
+#about-us {
+  margin-right: 40px;
+  margin-bottom:30px;
+  border-bottom: 4px solid #52280b;
+  padding-bottom: 45px; 
+}
+
+#about-us-h2 {
+  font-size: 4vw;
   font-weight: bold;
-}
-
-#aggregate-total, #total-all-locations {
+  width: 100%;
   text-align: center;
+  margin-bottom: 30px;
+}
+
+#about-us-text {
+  display:flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding-top: 30px;
+}
+
+#about-us-text img {
+  height: auto;
+  width: 40%;
+}
+
+#about-us-text p {
+  width: 50%;
+  font-size: 2vw;
+}
+
+#contact-us {
+  margin-right: 40px;
+  margin-bottom:30px;
+  border-bottom: 4px solid #52280b;
+  padding-bottom: 45px; 
+}
+
+#contact-us-h2 {
+  font-size: 4vw;
   font-weight: bold;
-  vertical-align: middle;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#contact-us p {
+  width: 100%;
+  text-align: center;
+  font-size: 2.25vw;
+}
+
+#merch-store-page a:hover {
+  width: 35%;
+}
+
+#merch-store-page {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 40px;
+  margin-bottom:30px;
+  padding-bottom: 45px;
+}
+
+#merch-store-h2 {
+  font-size: 4vw;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+#merch-store-page a {
+  height: auto;
+  width: 25%;
+  justify-content: center;
+  align-items: center; 
+  transition: 350ms; 
+}
+
+#process-order-page {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  margin-right: 40px;
+  margin-bottom:30px;
+  padding-bottom: 45px; 
+  border-bottom: 4px solid #52280b;
+}
+
+#process-order-h2 {
+  font-size: 4vw;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 30px;
 }
 
 footer {
