@@ -6,8 +6,15 @@ App that displays sales data of salmon cookies sold for various franchise locati
 
 ### Author: Melodic
 
+### Change Logs
+
+* Class 08 June, 10 2023 - Added CSS styling (colors, sizing, fonts, etc...)to salmon cookie website.
+* Class 07 June, 5 2023 - replaced object literals with prototypes in sales.html, refactored code, and deleted old code. Also created a total within the table to output aggregate total of all store location sales by hour.
+* Class 06 May 31, 2023 - Created ojbect literals for cookie store locations to output sales of each location by hour.
+
 ### Links and Resources
 
+* [Class 08 - In Class Demo](https://github.com/codefellows/seattle-code-201d100/tree/main/class-08/lab-b)
 * [Class 07 - In Class Demo](https://github.com/codefellows/seattle-code-201d97/tree/main/class-07)
 * [Class 06 - In Class Demo](https://github.com/codefellows/seattle-code-201d97/blob/main/class-06/inclass-demo/js/app.js)
 
