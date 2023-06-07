@@ -224,4 +224,13 @@ allFranchiseStores.push(seattle, tokyo, dubai, paris, lima);
 // Render all franchise store data
 renderAllStores();
 
+let newStoreForm = document.getElementById('newStoreForm');
 
+
+function handleSubmit(event) {
+  event.preventDefault();
+  console.log ('form submitted');
+}
+
+
+newStoreForm.addEventListener('submit', handleSubmit);
