@@ -2,9 +2,7 @@
 
 
 // ********** GLOBALS **************
-
-//Creates window into HTML document to manipulate
-let salesTableSection = document.getElementById('cookie-sales-table'); //access to dom
+let salesTableSection = document.getElementById('cookie-sales-table'); // Creates window into HTML document to manipulate
 let allFranchiseStores = []; // store all franchise store objects
 let salesTable; // variable to attach rows and table elements to
 let allCookieTotals = []; // to store hourly total cookies sold on all locations
@@ -29,21 +27,18 @@ let hours = [
 
 // **************** HELPER FUNCTIONS/UTILITES ***************
 
-// Generate random number of customers
-
+//* Function - Generate random number of customers
 function randomNumCust(min,max){
-  //Got this from MDN docs
+  //Got from MDN docs
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-// Generate number of cookies bought per customer
-
+//* Function - Generate number of cookies bought per customer
 function cookiesBoughtPerCust(numCust, cookies){
   return numCust * cookies;
 }
 
-// Create a table
-
+//* Function - Create a table
 function renderTable() {
   let tableElem = document.createElement('table');
   salesTableSection.appendChild(tableElem);
@@ -53,8 +48,7 @@ function renderTable() {
   salesTable = tableElem;
 }
 
-// Ouput hours as header to table
-
+//* Function - Ouput hours as header to table
 function renderHours() {
 
   //Create row that will display hours
@@ -81,8 +75,7 @@ function renderHours() {
   rowHours.appendChild(thDailyLocTotal);
 }
 
-// Output aggregate totals as footer to table
-
+//* Function - Output aggregate totals as footer to table
 function renderAllTotals(){
 
   //Create row that will display total sales per hour of all stores
@@ -111,8 +104,7 @@ function renderAllTotals(){
   rowAllTotals.appendChild(thAggregateTotal);
 }
 
-// Ouput all sales by hour of each location and aggregate totals
-
+//* Function - Ouput all sales by hour of each location and aggregate totals
 function renderAllStores(){
 
   // Elements will attach to global variable 'salesTable' stored within renderTable method
@@ -134,8 +126,43 @@ function renderAllStores(){
   renderAllTotals(); // the last row at the bottom
 }
 
+//* Function - Run this event when user clicks submit to add new franchise store
+function handleSubmit(event) {
+  event.preventDefault();
+
+  // Grab values from the form via their 'name' assigned
+  let newStoreName = event.target.newStoreName.value;
+  let minCust = +event.target.minCust.value; // Adding '+' converts from typeof 'string' to typeof 'number'
+  let maxCust = +event.target.maxCust.value; // Adding '+' converts from typeof 'string' to typeof 'number'
+  let avgCookiesPerCust = +event.target.avgCookiesPerCust.value; // Adding '+' converts from typeof 'string' to typeof 'number'
+
+  // Create new store with the entered values
+  let newFranchiseStore = new FranchiseStore(newStoreName, minCust, maxCust, avgCookiesPerCust);
+  allFranchiseStores.push(newFranchiseStore); // Add new store to array
+
+  removeFooter(); //remove footer
+  newFranchiseStore.getCookiesBought(); // Calculate cookies bought per hour at new store
+  newFranchiseStore.render(); // Render cookies bought per hour at new store to table
+  recalculateAllCookieTotals(); // Re-calculate totals
+  renderAllTotals(); // Render footer with new totals to table
+}
+
+//* Function - recalculate total of all cookies for all stores after adding new store
+function recalculateAllCookieTotals() {
+  allCookieTotals = []; // Clear out allCookieTotals array
+  allDayCookieSales = 0; // Clear out running total of allDayCookieSales
+  allFranchiseStores[0].getAllCookiesBought(); // Calculate all totals of cookies with new store added
+}
+
+//* Function - remove footer row
+function removeFooter() {
+  let footerRow = document.getElementById('row-all-totals'); // Access the row element by id of the footer
+  salesTable.removeChild(footerRow); // Remove footer row from table
+}
+
 // **************** CONSTRUCTOR FUNCTION ****************
 
+//* Constructor - Franchise store
 function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust){
   this.name = name;
   this.minCust = minCust;
@@ -148,8 +175,7 @@ function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust){
 
 // **************** PROTOTYPE METHODS ****************
 
-// Calculate cookies bought per hour, stores to cookiesBought array,
-// keep a running aggregate in 'totalCookies'
+//* Prototype - Calculate cookies bought per hour, stores to cookiesBought array, keeps running aggregate in 'totalCookies'
 FranchiseStore.prototype.getCookiesBought = function() {
   for(let i = 0; i < hours.length; i++) {
     this.numOfCust = randomNumCust(this.minCust, this.maxCust);
@@ -159,8 +185,7 @@ FranchiseStore.prototype.getCookiesBought = function() {
   }
 };
 
-// Calculate total of cookies from all stores per hour, and aggregate total
-
+//* Prototype - Calculate total of cookies from all stores per hour, and aggregate total
 FranchiseStore.prototype.getAllCookiesBought = function() {
 
   //Loop through each hour
@@ -168,8 +193,7 @@ FranchiseStore.prototype.getAllCookiesBought = function() {
 
     let allHourlyCookieSales = 0; // Holds total of hourly aggregate cookie sales
 
-    // Loop through each store, sum daily sales from cookiesBought array
-    // Sum total in 'allHourlyCookiSales'
+    // Loop through each store, sum daily sales from cookiesBought array, sum total in 'allHourlyCookiSales'
     for (let j = 0; j < allFranchiseStores.length; j++) {
       allHourlyCookieSales += allFranchiseStores[j].cookiesBought[i];
     }
@@ -182,8 +206,7 @@ FranchiseStore.prototype.getAllCookiesBought = function() {
   }
 };
 
-// Output cookie sales by hour for each store
-
+//* Prototype - Output cookie sales by hour for each store
 FranchiseStore.prototype.render = function() {
 
   //Create row to display each franchise name and daily sales data
@@ -218,10 +241,13 @@ let dubai = new FranchiseStore('Dubai', 11, 38, 3.7);
 let paris = new FranchiseStore('Paris', 20, 38, 2.3);
 let lima = new FranchiseStore('Lima', 2, 16, 14.6);
 
-// Push franchise store objects to the allFranchiseStores array
+//* Push franchise store objects to the allFranchiseStores array
 allFranchiseStores.push(seattle, tokyo, dubai, paris, lima);
 
-// Render all franchise store data
+// Render all initial franchise store data to the table
 renderAllStores();
 
-
+// 'Listen' to 'newStoreForm' for user input and and pass to event handler 'handSubmit' once user clicks 'Add Store'
+// The event handler will render new store sales data to table and re-calculate the footer totals of the table
+let newStoreForm = document.getElementById('newStoreForm');
+newStoreForm.addEventListener('submit', handleSubmit);
