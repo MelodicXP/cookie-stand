@@ -1,13 +1,14 @@
-# 201-Class 6, 7, 8
+# 201-Class 6, 7, 8, 9, 10
 
 ## Salmon Cookie Stands
 
-App that displays sales data of salmon cookies sold for various franchise locations
+App that displays that serves as a landing page for a business that sells salmon cookies and has a sales data page that ouputs the total of salmon cookies sold for its various franchise locations as well as the ability to add new stores to the sales data.  
 
 ### Author: Melodic
 
 ### Change Logs
 
+* Class 10 June, 19 2023 - Slight modification to function names for readability purposes.
 * Class 09 June, 14 2023 - Added ability for user to enter a new store location to table on sales page via a form utlizing event listeners and handlers.
 * Class 08 June, 10 2023 - Added CSS styling (colors, sizing, fonts, etc...)to salmon cookie website.
 * Class 07 June, 5 2023 - replaced object literals with prototypes in sales.html, refactored code, and deleted old code. Also created a total within the table to output aggregate total of all store location sales by hour.
@@ -23,6 +24,7 @@ App that displays sales data of salmon cookies sold for various franchise locati
 
 ### Lighthouse Accessibility Report Score
 
+* June 19, 2023 - [LightHouse Accessibility Score](img/LightHouse06192023.jpg)
 * June 14, 2023 - [LightHouse Accessibility Score](img/LightHouse06142023.jpg)
 * June 10, 2023 - [LightHouse Accessibility Score](img/LightHouse06102023.jpg)
 * June 5, 2023 - [LightHouse Accessibility Score](img/LightHouseScreenshot06052023.jpg)
