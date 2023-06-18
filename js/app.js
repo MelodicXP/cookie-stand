@@ -49,7 +49,7 @@ function renderTable() {
 }
 
 //* Function - Ouput hours as header to table
-function renderHours() {
+function renderHeader() {
 
   //Create row that will display hours
   let rowHours = document.createElement('tr');
@@ -76,7 +76,7 @@ function renderHours() {
 }
 
 //* Function - Output aggregate totals as footer to table
-function renderAllTotals(){
+function renderFooter(){
 
   //Create row that will display total sales per hour of all stores
   let rowAllTotals = document.createElement('tr');
@@ -111,7 +111,7 @@ function renderAllStores(){
   renderTable();
 
   // Displays hours as header in the table
-  renderHours();
+  renderHeader();
 
   // Loop through each store retrieving cookies bought per day and outputting to the table
   for(let i = 0; i < allFranchiseStores.length; i++) {
@@ -123,7 +123,7 @@ function renderAllStores(){
   allFranchiseStores[0].getAllCookiesBought();
 
   // Outputs to last row of the table the aggregate totals per hour and day
-  renderAllTotals(); // the last row at the bottom
+  renderFooter(); // the last row at the bottom
 }
 
 //* Function - Run this event when user clicks submit to add new franchise store
@@ -144,7 +144,8 @@ function handleSubmit(event) {
   newFranchiseStore.getCookiesBought(); // Calculate cookies bought per hour at new store
   newFranchiseStore.render(); // Render cookies bought per hour at new store to table
   recalculateAllCookieTotals(); // Re-calculate totals
-  renderAllTotals(); // Render footer with new totals to table
+  renderFooter(); // Render footer with new totals to table
+  newStoreForm.reset(); //resets form for continued user input
 }
 
 //* Function - recalculate total of all cookies for all stores after adding new store
