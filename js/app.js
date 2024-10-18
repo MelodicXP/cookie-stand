@@ -32,7 +32,7 @@ function generateRandomNumOfCustomers(min,max){
 }
 
 //* Function - Generate number of cookies bought per customer
-function cookiesBoughtPerCust(numCust, cookies){
+function calculateCookiesBoughtPerCustomer(numCust, cookies){
   return numCust * cookies;
 }
 
@@ -178,7 +178,7 @@ function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust){
 FranchiseStore.prototype.getCookiesBought = function() {
   for(let i = 0; i < hours.length; i++) {
     this.numOfCust = generateRandomNumOfCustomers(this.minCust, this.maxCust);
-    let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
+    let cookies = calculateCookiesBoughtPerCustomer(this.numOfCust, Math.round(this.avgCookiesPerCust));
     this.cookiesBought.push(cookies);
     this.totalCookies += cookies;
   }
