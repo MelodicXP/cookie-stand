@@ -1,6 +1,5 @@
 'use strict';
 
-
 // ********** GLOBALS **************
 let salesTableSection = document.getElementById('cookie-sales-table'); // Creates window into HTML document to manipulate
 let allFranchiseStores = []; // store all franchise store objects
@@ -28,8 +27,7 @@ let hours = [
 // **************** HELPER FUNCTIONS/UTILITES ***************
 
 //* Function - Generate random number of customers
-function randomNumCust(min,max){
-  //Got from MDN docs
+function generateRandomNumOfCustomers(min,max){
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
@@ -179,7 +177,7 @@ function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust){
 //* Prototype - Calculate cookies bought per hour, stores to cookiesBought array, keeps running aggregate in 'totalCookies'
 FranchiseStore.prototype.getCookiesBought = function() {
   for(let i = 0; i < hours.length; i++) {
-    this.numOfCust = randomNumCust(this.minCust, this.maxCust);
+    this.numOfCust = generateRandomNumOfCustomers(this.minCust, this.maxCust);
     let cookies = cookiesBoughtPerCust(this.numOfCust, Math.round(this.avgCookiesPerCust));
     this.cookiesBought.push(cookies);
     this.totalCookies += cookies;
