@@ -28,16 +28,31 @@ const createTableCell = (type, content, attributes = {}) => {
   return cell;
 };
 
+// Render all franchise stores into the sales table
+const renderAllStores = () => {
+  const salesTableElement = createTable(); // Create the sales table
+
+  createHeaderRowWithHours(salesTableElement, hours); // Render header row with hours 
+
+  createRowsWithHourlySales(allFranchiseStores, salesTableElement); // Render each stores sales by hour
+
+  FranchiseStore.calculateAllCookiesBought(); // Calculate total sales for the footer
+
+  renderFooter(salesTableElement); // Render footer row
+
+  return salesTableElement; // return to be used elsewhere (i.e., when removing footer)
+};
+
 // Create and append a table element to the salesTableSection
-const renderTable = () => {
+const createTable = () => {
   const salesTableSection = document.getElementById('cookie-sales-table');
   const salesTableElement = document.createElement('table');
   salesTableSection.appendChild(salesTableElement);
   return salesTableElement;
 };
 
-// Render hours as table headers
-const renderTableHeader = (tableElement) => {
+// Create header row with hours as table headers and append to salesTableElement
+const createHeaderRowWithHours = (tableElement) => {
 
   // Create row that will display hours
   const hoursRow = document.createElement('tr');
@@ -55,6 +70,14 @@ const renderTableHeader = (tableElement) => {
   // Create and add final "Total" cell
   hoursRow.appendChild(createTableCell('th', 'Daily Location Total', { id: 'daily-loc-total'}));
 };
+
+// Create store row and calculate total sales
+const createRowsWithHourlySales = (allFranchiseStores, salesTableElement) => {
+  allFranchiseStores.forEach((store) => {
+    store.getCookiesBoughtPerHour();
+    store.render(salesTableElement);
+  });
+}
 
 // Output aggregate totals as footer to table
 const renderFooter = (salesTableElement) => {
@@ -79,24 +102,6 @@ const renderFooter = (salesTableElement) => {
   });
   footerRow.appendChild(createTableCell('th', allDayCookieSales, { id: 'aggregate-total'}));
 }
-
-// Render all franchise stores into the sales table
-const renderAllStores = () => {
-  const salesTableElement = renderTable(); // Create the sales table
-
-  renderTableHeader(salesTableElement, hours); // Render header row with hours 
-
-  // Render each store row and calculate total sales
-  allFranchiseStores.forEach((store) => {
-    store.getCookiesBoughtPerHour();
-    store.render(salesTableElement);
-  });
-
-  FranchiseStore.calculateAllCookiesBought(); // Calculate totals for the footer
-  renderFooter(salesTableElement); // Render footer row
-
-  return salesTableElement; // return to be used elsewhere (i.e., when removing footer)
-};
 
 // User adds new franchise store
 const handleSubmit = (event) => {
@@ -189,14 +194,30 @@ const franchiseData = [
   ['Lima', 2, 16, 4.6],
 ];
 
-// Create franchise stores from franchiseData
-franchiseData.forEach(([name, min, max, avg]) => {
-  allFranchiseStores.push(new FranchiseStore(name, min, max, avg));
-});
+const createFranchiseStoresFromData = () => {
+  franchiseData.forEach(([name, min, max, avg]) => {
+    allFranchiseStores.push(new FranchiseStore(name, min, max, avg));
+  });
+}
 
+const setupFormEventListener = (formId, submitHandler) => {
+  const formElement = document.getElementById(formId);
+  if (formElement) {
+    formElement.addEventListener('submit', submitHandler);
+  } else {
+    console.error(`Form with ID '${formId}' not found.`);
+  }
+};
+
+createFranchiseStoresFromData();
 renderAllStores(); // Render initial table data
+setupFormEventListener('newStoreForm', handleSubmit); // Setup the event listener for 'newStoreForm'
+
 
 // 'Listen' to 'newStoreForm' for user input and and pass to event handler 'handSubmit' once user clicks 'Add Store'
 // The event handler will render new store sales data to table and re-calculate the footer totals of the table
-const newStoreForm = document.getElementById('newStoreForm');
-newStoreForm.addEventListener('submit', handleSubmit);
+// const newStoreForm = document.getElementById('newStoreForm');
+// newStoreForm.addEventListener('submit', handleSubmit);
+// Function to set up an event listener for form submission
+
+
