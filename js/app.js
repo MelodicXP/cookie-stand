@@ -163,9 +163,7 @@ function removeFooter(salesTableElement) {
     salesTableElement.removeChild(footerRow); // Remove footer row from table
   }
 }
-// **************** CONSTRUCTOR FUNCTION ****************
-
-// Constructor - Franchise store
+// **************** Franchise Store Class ****************
 class FranchiseStore {
   constructor(name, minCust, maxCust, avgCookiesPerCust) {
     this.name = name;
@@ -176,7 +174,7 @@ class FranchiseStore {
     this.cookiesBought = [];
     this.totalCookies = 0;
   }
-  
+
   // Calculate cookies bought per hour
   getCookiesBought() {
     for (let i = 0; i < hours.length; i++) {
