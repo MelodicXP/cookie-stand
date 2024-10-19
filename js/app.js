@@ -166,74 +166,74 @@ function removeFooter(salesTableElement) {
 // **************** CONSTRUCTOR FUNCTION ****************
 
 // Constructor - Franchise store
-function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust) {
-  this.name = name;
-  this.minCust = minCust;
-  this.maxCust = maxCust;
-  this.avgCookiesPerCust = avgCookiesPerCust;
-  this.numOfCust = 0;
-  this.cookiesBought = [];
-  this.totalCookies = 0;
-}
-
-// **************** PROTOTYPE METHODS ****************
-
-// Calculate cookies bought per hour, stores to cookiesBought array, keeps running aggregate in 'totalCookies'
-FranchiseStore.prototype.getCookiesBought = function () {
-  for (let i = 0; i < hours.length; i++) {
-    this.numOfCust = generateRandomNumOfCustomers(this.minCust, this.maxCust);
-    let cookies = calculateCookiesBoughtPerCustomer(this.numOfCust, Math.round(this.avgCookiesPerCust));
-    this.cookiesBought.push(cookies);
-    this.totalCookies += cookies;
+class FranchiseStore {
+  constructor(name, minCust, maxCust, avgCookiesPerCust) {
+    this.name = name;
+    this.minCust = minCust;
+    this.maxCust = maxCust;
+    this.avgCookiesPerCust = avgCookiesPerCust;
+    this.numOfCust = 0;
+    this.cookiesBought = [];
+    this.totalCookies = 0;
   }
-};
+  
+  // Calculate cookies bought per hour
+  getCookiesBought() {
+    for (let i = 0; i < hours.length; i++) {
+      this.numOfCust = generateRandomNumOfCustomers(this.minCust, this.maxCust);
+      let cookies = calculateCookiesBoughtPerCustomer(this.numOfCust, Math.round(this.avgCookiesPerCust));
+      this.cookiesBought.push(cookies);
+      this.totalCookies += cookies;
+    }
+  }
 
-// Calculate total of cookies from all stores per hour, and aggregate total
-FranchiseStore.prototype.getAllCookiesBought = function () {
+  // Calculate total of cookies from all stores per hour, and aggregate total
+  getAllCookiesBought() {
 
-  //Loop through each hour
-  for (let i = 0; i < hours.length; i++) {
+    //Loop through each hour
+    for (let i = 0; i < hours.length; i++) {
 
-    let allHourlyCookieSales = 0; // Holds total of hourly aggregate cookie sales
+      let allHourlyCookieSales = 0; // Holds total of hourly aggregate cookie sales
 
-    // Loop through each store, sum daily sales from cookiesBought array, sum total in 'allHourlyCookiSales'
-    for (let j = 0; j < allFranchiseStores.length; j++) {
-      allHourlyCookieSales += allFranchiseStores[j].cookiesBought[i];
+      // Loop through each store, sum daily sales from cookiesBought array, sum total in 'allHourlyCookiSales'
+      for (let j = 0; j < allFranchiseStores.length; j++) {
+        allHourlyCookieSales += allFranchiseStores[j].cookiesBought[i];
+      }
+
+      // Push aggregate total per hour to allCookiesTotal array
+      allCookieTotals.push(allHourlyCookieSales);
+
+      // Sum total of each hour aggregate sales of all stores
+      allDayCookieSales += allHourlyCookieSales;
+    }
+  }
+
+  // Output cookie sales by hour for each store
+  render(salesTableElement) {
+
+    //Create row to display each franchise name and daily sales data
+    let row = document.createElement('tr');
+    salesTableElement.appendChild(row);
+
+    // Create table header for name of store
+    let th1Elem = document.createElement('th');
+    th1Elem.textContent = this.name;
+    row.appendChild(th1Elem);
+
+    // Create table data to display daily sales of cookies
+    for (let i = 0; i < this.cookiesBought.length; i++) {
+      let tdElem = document.createElement('td');
+      tdElem.textContent = `${this.cookiesBought[i]}`;
+      row.appendChild(tdElem);
     }
 
-    // Push aggregate total per hour to allCookiesTotal array
-    allCookieTotals.push(allHourlyCookieSales);
-
-    // Sum total of each hour aggregate sales of all stores
-    allDayCookieSales += allHourlyCookieSales;
-  }
-};
-
-// Output cookie sales by hour for each store
-FranchiseStore.prototype.render = function (salesTableElement) {
-
-  //Create row to display each franchise name and daily sales data
-  let row = document.createElement('tr');
-  salesTableElement.appendChild(row);
-
-  // Create table header for name of store
-  let th1Elem = document.createElement('th');
-  th1Elem.textContent = this.name;
-  row.appendChild(th1Elem);
-
-  // Create table data to display daily sales of cookies
-  for (let i = 0; i < this.cookiesBought.length; i++) {
+    // Create table data to display total sales of each location
     let tdElem = document.createElement('td');
-    tdElem.textContent = `${this.cookiesBought[i]}`;
+    tdElem.setAttribute('id', 'total-cookies-perStore'); //set id for styling
+    tdElem.textContent = `${this.totalCookies}`;
     row.appendChild(tdElem);
   }
-
-  // Create table data to display total sales of each location
-  let tdElem = document.createElement('td');
-  tdElem.setAttribute('id', 'total-cookies-perStore'); //set id for styling
-  tdElem.textContent = `${this.totalCookies}`;
-  row.appendChild(tdElem);
-};
+}
 
 // **************** EXECUTABLE CODE ****************
 
