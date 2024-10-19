@@ -27,18 +27,18 @@ let hours = [
 // **************** HELPER FUNCTIONS/UTILITES ***************
 
 //* Function - Generate random number of customers
-function generateRandomNumOfCustomers(min,max){
+function generateRandomNumOfCustomers(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
 //* Function - Generate number of cookies bought per customer
-function calculateCookiesBoughtPerCustomer(numCust, cookies){
+function calculateCookiesBoughtPerCustomer(numCust, cookies) {
   return numCust * cookies;
 }
 
 //* Function - Create a table
 function renderTable() {
-  salesTableElement= document.createElement('table');
+  salesTableElement = document.createElement('table');
   salesTableSection.appendChild(salesTableElement);
 }
 
@@ -56,7 +56,7 @@ function renderHeader() {
   rowHours.appendChild(thHoursElem);
 
   // Create for loop to display hours across rowHours
-  for(let i = 0; i < hours.length; i++) {
+  for (let i = 0; i < hours.length; i++) {
     let thHoursElem = document.createElement('th');
     thHoursElem.textContent = `${hours[i]}`;
     rowHours.appendChild(thHoursElem);
@@ -70,7 +70,7 @@ function renderHeader() {
 }
 
 //* Function - Output aggregate totals as footer to table
-function renderFooter(){
+function renderFooter() {
 
   //Create row that will display total sales per hour of all stores
   let rowAllTotals = document.createElement('tr');
@@ -84,7 +84,7 @@ function renderFooter(){
   rowAllTotals.appendChild(thTotalsElem);
 
   // Create for loop to display total sales across 'rowAllTotals'
-  for(let i = 0; i < hours.length; i++) {
+  for (let i = 0; i < hours.length; i++) {
     let thTotalsElem = document.createElement('th');
     thTotalsElem.setAttribute('id', 'hourly-totals'); //set id for styling
     thTotalsElem.textContent = `${allCookieTotals[i]}`;
@@ -94,12 +94,12 @@ function renderFooter(){
   // Create last cell displaying text aggregate total of all stores for the day
   let thAggregateTotal = document.createElement('th');
   thAggregateTotal.setAttribute('id', 'aggregate-total'); //set id for styling
-  thAggregateTotal.textContent = `${allDayCookieSales}` ;
+  thAggregateTotal.textContent = `${allDayCookieSales}`;
   rowAllTotals.appendChild(thAggregateTotal);
 }
 
 //* Function - Ouput all sales by hour of each location and aggregate totals
-function renderAllStores(){
+function renderAllStores() {
 
   // Elements will attach to global variable 'salesTableElement' stored within renderTable method
   renderTable();
@@ -108,7 +108,7 @@ function renderAllStores(){
   renderHeader();
 
   // Loop through each store retrieving cookies bought per day and outputting to the table
-  for(let i = 0; i < allFranchiseStores.length; i++) {
+  for (let i = 0; i < allFranchiseStores.length; i++) {
     allFranchiseStores[i].getCookiesBought();
     allFranchiseStores[i].render();
   }
@@ -158,7 +158,7 @@ function removeFooter() {
 // **************** CONSTRUCTOR FUNCTION ****************
 
 //* Constructor - Franchise store
-function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust){
+function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust) {
   this.name = name;
   this.minCust = minCust;
   this.maxCust = maxCust;
@@ -171,8 +171,8 @@ function FranchiseStore(name, minCust, maxCust, avgCookiesPerCust){
 // **************** PROTOTYPE METHODS ****************
 
 //* Prototype - Calculate cookies bought per hour, stores to cookiesBought array, keeps running aggregate in 'totalCookies'
-FranchiseStore.prototype.getCookiesBought = function() {
-  for(let i = 0; i < hours.length; i++) {
+FranchiseStore.prototype.getCookiesBought = function () {
+  for (let i = 0; i < hours.length; i++) {
     this.numOfCust = generateRandomNumOfCustomers(this.minCust, this.maxCust);
     let cookies = calculateCookiesBoughtPerCustomer(this.numOfCust, Math.round(this.avgCookiesPerCust));
     this.cookiesBought.push(cookies);
@@ -181,7 +181,7 @@ FranchiseStore.prototype.getCookiesBought = function() {
 };
 
 //* Prototype - Calculate total of cookies from all stores per hour, and aggregate total
-FranchiseStore.prototype.getAllCookiesBought = function() {
+FranchiseStore.prototype.getAllCookiesBought = function () {
 
   //Loop through each hour
   for (let i = 0; i < hours.length; i++) {
@@ -202,7 +202,7 @@ FranchiseStore.prototype.getAllCookiesBought = function() {
 };
 
 //* Prototype - Output cookie sales by hour for each store
-FranchiseStore.prototype.render = function() {
+FranchiseStore.prototype.render = function () {
 
   //Create row to display each franchise name and daily sales data
   let row = document.createElement('tr');
@@ -214,7 +214,7 @@ FranchiseStore.prototype.render = function() {
   row.appendChild(th1Elem);
 
   // Create table data to display daily sales of cookies
-  for(let i = 0; i < this.cookiesBought.length; i++) {
+  for (let i = 0; i < this.cookiesBought.length; i++) {
     let tdElem = document.createElement('td');
     tdElem.textContent = `${this.cookiesBought[i]}`;
     row.appendChild(tdElem);
