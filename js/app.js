@@ -37,25 +37,23 @@ function renderTable() {
 }
 
 // Render hours as table headers
-function renderTableHeader(tableElement, hours) {
+function renderTableHeader(tableElement) {
 
   // Create row that will display hours
   const hoursRow = document.createElement('tr');
   hoursRow.id = 'row-hours';
   tableElement.appendChild(hoursRow);
 
-  // Add an initial empty header cell
-  hoursRow.appendChild(createTableCell('th', ''));
+  // Create and add to row initial empty header cell 
+  hoursRow.appendChild(createTableCell('th', '')); // Initial empty cell
+  
+  // Create and add to row additional header cells for each hour
+  hours.forEach((hour) => {
+    hoursRow.appendChild(createTableCell('th', hour))
+  });
 
-  // Create for loop to display hours across hours row
-  for (let i = 0; i < hours.length; i++) {
-    hoursRow.appendChild(createTableCell('th', `${hours[i]}`));
-  }
-
-  // Add a final cell for 'Daily Location Total'
-  let dailyLocationTotalHeader = createTableCell('th', 'Daily Location Total');
-  dailyLocationTotalHeader.id = 'daily-loc-total';
-  hoursRow.appendChild(dailyLocationTotalHeader);
+  // Create and add final "Total" cell
+  hoursRow.appendChild(createTableCell('th', 'Daily Location Total', { id: 'daily-loc-total'}));
 }
 
 // Output aggregate totals as footer to table
