@@ -102,7 +102,7 @@ function renderFooter(salesTableElement) {
   rowAllTotals.appendChild(thAggregateTotal);
 }
 
-//* Function - Ouput all sales by hour of each location and aggregate totals
+// Ouput all sales by hour of each location and aggregate totals
 function renderAllStores() {
 
   // Elements will attach to global variable 'salesTableElement' stored within renderTable method
@@ -122,9 +122,11 @@ function renderAllStores() {
 
   // Outputs to last row of the table the aggregate totals per hour and day
   renderFooter(salesTableElement); // the last row at the bottom
+
+  return salesTableElement; // return to be used elsewhere (i.e., when removing footer)
 }
 
-//* Function - Run this event when user clicks submit to add new franchise store
+// User adds new franchise store
 function handleSubmit(event) {
   event.preventDefault();
 
@@ -138,11 +140,14 @@ function handleSubmit(event) {
   let newFranchiseStore = new FranchiseStore(newStoreName, minCust, maxCust, avgCookiesPerCust);
   allFranchiseStores.push(newFranchiseStore); // Add new store to array
 
-  removeFooter(); //remove footer
+  // Retrieve and keep track of salesTableElement
+  let salesTableElement = document.querySelector('#cookie-sales-table table');
+
+  removeFooter(salesTableElement); //remove footer
   newFranchiseStore.getCookiesBought(); // Calculate cookies bought per hour at new store
-  newFranchiseStore.render(); // Render cookies bought per hour at new store to table
+  newFranchiseStore.render(salesTableElement); // Render cookies bought per hour at new store to table
   recalculateAllCookieTotals(); // Re-calculate totals
-  renderFooter(); // Render footer with new totals to table
+  renderFooter(salesTableElement); // Render footer with new totals to table
   newStoreForm.reset(); //resets form for continued user input
 }
 
@@ -153,12 +158,13 @@ function recalculateAllCookieTotals() {
   allFranchiseStores[0].getAllCookiesBought(); // Calculate all totals of cookies with new store added
 }
 
-//* Function - remove footer row
-function removeFooter() {
+// Remove footer row (invoked when user adds new store)
+function removeFooter(salesTableElement) {
   let footerRow = document.getElementById('row-all-totals'); // Access the row element by id of the footer
-  salesTableElement.removeChild(footerRow); // Remove footer row from table
+  if (footerRow) {
+    salesTableElement.removeChild(footerRow); // Remove footer row from table
+  }
 }
-
 // **************** CONSTRUCTOR FUNCTION ****************
 
 //* Constructor - Franchise store
