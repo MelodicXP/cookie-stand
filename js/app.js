@@ -4,40 +4,27 @@
 let allFranchiseStores = []; // store all franchise store objects
 let allCookieTotals = []; // to store hourly total cookies sold on all locations
 let allDayCookieSales = 0; // to store aggregate total of all cookies of all stores all day
-let hours = [
-  '6:00am',
-  '7:00am',
-  '8:00am',
-  '9:00am',
-  '10:00am',
-  '11:00am',
-  '12:00pm',
-  '1:00pm',
-  '2:00pm',
-  '3:00pm',
-  '4:00pm',
-  '5:00pm',
-  '6:00pm',
-  '7:00pm',
-  '8:00pm'
+const hours = [
+  '6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am',
+  '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm',
+  '6:00pm', '7:00pm', '8:00pm'
 ];
 
 // **************** HELPER FUNCTIONS/UTILITES ***************
 
-// Generate random number of customers
-function generateRandomNumOfCustomers(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
+// Generate random number of customers between min and max
+const generateRandomNumOfCustomers = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
 
 // Generate number of cookies bought per customer
-function calculateCookiesBoughtPerCustomer(numCust, cookies) {
-  return numCust * cookies;
-}
+const calculateCookiesBoughtPerCustomer = (numCust, avgCookies) => numCust * avgCookies;
 
-// Create a cell element for the table
-const createTableCell = (type, content) => {
+// Create a cell element for the table (used for headers and data cells)
+const createTableCell = (type, content, attributes = {}) => {
   const cell = document.createElement(type);
   cell.textContent = content;
+  for (const key in attributes) {
+    cell.setAttribute(key, attributes[key]);
+  }
   return cell;
 }
 
