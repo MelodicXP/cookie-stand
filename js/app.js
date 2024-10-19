@@ -1,9 +1,9 @@
 'use strict';
 
 // ********** GLOBALS **************
-let salesTableSection = document.getElementById('cookie-sales-table'); // Creates window into HTML document to manipulate
+let salesTableSection = document.getElementById('cookie-sales-table');
+let salesTableElement; // variable to attach rows and table elements to
 let allFranchiseStores = []; // store all franchise store objects
-let salesTable; // variable to attach rows and table elements to
 let allCookieTotals = []; // to store hourly total cookies sold on all locations
 let allDayCookieSales = 0; // to store aggregate total of all cookies of all stores all day
 let hours = [
@@ -38,12 +38,8 @@ function calculateCookiesBoughtPerCustomer(numCust, cookies){
 
 //* Function - Create a table
 function renderTable() {
-  let tableElem = document.createElement('table');
-  salesTableSection.appendChild(tableElem);
-
-  // Apply tableElem to globalscope variable 'salesTable'
-  // so that all table elements from render() can attach to this one table
-  salesTable = tableElem;
+  salesTableElement= document.createElement('table');
+  salesTableSection.appendChild(salesTableElement);
 }
 
 //* Function - Ouput hours as header to table
@@ -52,7 +48,7 @@ function renderHeader() {
   //Create row that will display hours
   let rowHours = document.createElement('tr');
   rowHours.setAttribute('id', 'row-hours');
-  salesTable.appendChild(rowHours);
+  salesTableElement.appendChild(rowHours);
 
   // Create empty cell first cell
   let thHoursElem = document.createElement('th');
@@ -79,7 +75,7 @@ function renderFooter(){
   //Create row that will display total sales per hour of all stores
   let rowAllTotals = document.createElement('tr');
   rowAllTotals.setAttribute('id', 'row-all-totals');
-  salesTable.appendChild(rowAllTotals);
+  salesTableElement.appendChild(rowAllTotals);
 
   // Create empty cell first cell
   let thTotalsElem = document.createElement('th');
@@ -105,7 +101,7 @@ function renderFooter(){
 //* Function - Ouput all sales by hour of each location and aggregate totals
 function renderAllStores(){
 
-  // Elements will attach to global variable 'salesTable' stored within renderTable method
+  // Elements will attach to global variable 'salesTableElement' stored within renderTable method
   renderTable();
 
   // Displays hours as header in the table
@@ -156,7 +152,7 @@ function recalculateAllCookieTotals() {
 //* Function - remove footer row
 function removeFooter() {
   let footerRow = document.getElementById('row-all-totals'); // Access the row element by id of the footer
-  salesTable.removeChild(footerRow); // Remove footer row from table
+  salesTableElement.removeChild(footerRow); // Remove footer row from table
 }
 
 // **************** CONSTRUCTOR FUNCTION ****************
@@ -210,7 +206,7 @@ FranchiseStore.prototype.render = function() {
 
   //Create row to display each franchise name and daily sales data
   let row = document.createElement('tr');
-  salesTable.appendChild(row);
+  salesTableElement.appendChild(row);
 
   // Create table header for name of store
   let th1Elem = document.createElement('th');
