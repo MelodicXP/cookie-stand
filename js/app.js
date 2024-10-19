@@ -88,7 +88,7 @@ const renderAllStores = () => {
 
   // Render each store row and calculate total sales
   allFranchiseStores.forEach((store) => {
-    store.getCookiesBought();
+    store.getCookiesBoughtPerHour();
     store.render(salesTableElement);
   });
 
@@ -115,7 +115,7 @@ const handleSubmit = (event) => {
   // Re-render the sales table to include new store
   const salesTableElement = document.querySelector('#cookie-sales-table table');
   renderFooter(salesTableElement); // Remove footer
-  newFranchiseStore.getCookiesBought(); // Calculate cookies bought per hour at new store
+  newFranchiseStore.getCookiesBoughtPerHour(); // Calculate cookies bought per hour at new store
   newFranchiseStore.render(salesTableElement); // Render cookies bought per hour at new store to table
   FranchiseStore.calculateAllCookiesBought(); // Re-calculate totals
   renderFooter(salesTableElement); // Render footer with new totals to table
@@ -134,7 +134,7 @@ class FranchiseStore {
   }
 
   // Calculate cookies bought per hour
-  getCookiesBought() {
+  getCookiesBoughtPerHour() {
     this.cookiesBought = []; // Clear any previous data
     this.totalCookies = 0; // Reset running total
 
