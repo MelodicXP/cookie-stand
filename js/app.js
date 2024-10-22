@@ -28,6 +28,7 @@ const createTableCell = (type, content, attributes = {}) => {
   return cell;
 };
 
+// **************** Render All Stores ***************
 // Render all franchise stores into the sales table
 const renderAllStores = () => {
   const salesTableElement = createTable(); // Create the sales table
@@ -113,18 +114,21 @@ const handleSubmit = (event) => {
   const maxCust = +event.target.maxCust.value; // Adding '+' converts from typeof 'string' to typeof 'number'
   const avgCookiesPerCust = +event.target.avgCookiesPerCust.value; // Adding '+' converts from typeof 'string' to typeof 'number'
 
-  // Create new store with the entered values
+  // Create new store with the entered values and add to table
   const newFranchiseStore = new FranchiseStore(newStoreName, minCust, maxCust, avgCookiesPerCust);
-  allFranchiseStores.push(newFranchiseStore); // Add new store to array
+  addFranchiseStoreToTable(newFranchiseStore);
 
+  newStoreForm.reset(); // Reset form for continued user input
+}
+
+const addFranchiseStoreToTable = (newFranchiseStore) => {
+  allFranchiseStores.push(newFranchiseStore); // Add new store to array
   // Re-render the sales table to include new store
   const salesTableElement = document.querySelector('#cookie-sales-table table');
-  renderFooter(salesTableElement); // Remove footer
   newFranchiseStore.getCookiesBoughtPerHour(); // Calculate cookies bought per hour at new store
   newFranchiseStore.render(salesTableElement); // Render cookies bought per hour at new store to table
   FranchiseStore.calculateAllCookiesBought(); // Re-calculate totals
   renderFooter(salesTableElement); // Render footer with new totals to table
-  newStoreForm.reset(); // Reset form for continued user input
 }
 
 // **************** Franchise Store Class ****************
